@@ -5,6 +5,13 @@ project(CardinalityEstimation)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Add compiler flags
+if(MSVC)
+    add_compile_options(/W4)
+else()
+    add_compile_options(-Wall -Wextra)
+endif()
+
 # Detect operating system
 if(WIN32)
     message("Your OS: Windows")
@@ -25,9 +32,9 @@ set(SOURCES
     src/CardinalityEstimation.cpp
 )
 
-# Create main executable
-add_executable(main ${SOURCES})
-
 # Add XXHash library
 add_subdirectory(third_party/xxhash)
+
+# Create main executable
+add_executable(main ${SOURCES})
 target_link_libraries(main PRIVATE xxhash)
