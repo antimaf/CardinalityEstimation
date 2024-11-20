@@ -12,7 +12,7 @@ A high-performance C++ implementation of the HyperLogLog algorithm for database 
   - Linux: GCC
   - macOS: Clang
 
-For Windows users coming from Python/JavaScript:
+For Windows users coming from other languages:
 1. Download MinGW-w64 from [here](https://www.mingw-w64.org/downloads/)
 2. Download CMake from [here](https://cmake.org/download/)
 3. Add both to your system PATH
