@@ -114,21 +114,18 @@ The core algorithm works through these key steps:
 void insertTuple(const std::tuple<int, int>& tuple)
 ```
 - **What it does**: Adds a new item to count
-- **Python equivalent**: `my_set.add(item)`
 - **Usage example**: `engine.insertTuple({1, 2})`
 
 ```cpp
 double estimate()
 ```
 - **What it does**: Returns estimated unique count
-- **Python equivalent**: `len(my_set)`
 - **Usage example**: `double count = engine.estimate()`
 
 ```cpp
 void prepare()
 ```
 - **What it does**: Resets the engine
-- **Python equivalent**: `my_set.clear()`
 - **Usage example**: `engine.prepare()`
 
 ## 🔧 Testing
@@ -148,7 +145,7 @@ cd build
 ./main
 ```
 
-## 🚫 Common Errors for Python/JS Developers
+## 🚫 Common Errors 
 
 1. **Compilation Errors**
    ```bash
