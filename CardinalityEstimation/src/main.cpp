@@ -1,4 +1,4 @@
-#include "../include/CardinalityEstimation.h"
+#include "CardinalityEstimation.h"
 #include <iostream>
 #include <random>
 #include <chrono>

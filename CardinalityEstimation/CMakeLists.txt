@@ -4,12 +4,13 @@ project(CardinalityEstimation)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Add compiler flags
 if(MSVC)
     add_compile_options(/W4)
 else()
-    add_compile_options(-Wall -Wextra)
+    add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 # Detect operating system
@@ -18,12 +19,6 @@ if(WIN32)
 elseif(UNIX)
     message("Your OS: Unix")
 endif()
-
-# Add include directories
-include_directories(
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/third_party
-)
 
 # Add source files
 set(SOURCES
@@ -37,4 +32,13 @@ add_subdirectory(third_party/xxhash)
 
 # Create main executable
 add_executable(main ${SOURCES})
+
+# Set include directories properly
+target_include_directories(main
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/third_party
+)
+
+# Link libraries
 target_link_libraries(main PRIVATE xxhash)
