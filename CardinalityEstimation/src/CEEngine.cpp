@@ -1,9 +1,10 @@
-#include "../include/CardinalityEstimation.h"
-#include "../third_party/xxhash/xxhash.h"
+#include "CardinalityEstimation.h"
+#include "xxhash/xxhash.h"
 #include <cmath>
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
+#include <bit>
 
 class HyperLogLog {
 private:
@@ -36,7 +37,7 @@ public:
 
         uint64_t hash = hashTuple(value);
         int idx = hash >> (64 - registerBits);
-        uint8_t rank = std::min(64 - registerBits, 1 + __builtin_ctzll(hash | (1ULL << (64 - registerBits))));
+        uint8_t rank = std::min(64 - registerBits, 1 + std::countl_zero(hash | (1ULL << (64 - registerBits))));
         registers[idx] = std::max(registers[idx], rank);
     }
 
