@@ -10,7 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 if(MSVC)
     add_compile_options(/W4 /permissive-)
 else()
-    add_compile_options(-Wall -Wextra -Wpedantic -fno-gnu-extensions)
+    add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 # Detect operating system
