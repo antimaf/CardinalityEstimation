@@ -96,7 +96,10 @@ int main() {
         int counter = 0;
         
         runTest("Sequential Values", NUM_TUPLES,
-                [&]() { return std::make_tuple(counter++, counter++); });
+                [&counter]() {
+                    int current = counter++;
+                    return std::make_tuple(current, current + 1);
+                });
     }
     
     // Test 7: Many Duplicates

@@ -4,7 +4,24 @@
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
-#include <bit>
+
+namespace {
+    // Count leading zeros in a 64-bit integer
+    inline int countLeadingZeros(uint64_t x) {
+        if (x == 0) return 64;
+        
+        int count = 0;
+        // Start from the most significant bit
+        uint64_t mask = UINT64_C(1) << 63;
+        
+        while ((x & mask) == 0) {
+            count++;
+            mask >>= 1;
+        }
+        
+        return count;
+    }
+}
 
 class HyperLogLog {
 private:
@@ -23,7 +40,7 @@ private:
     }
 
 public:
-    HyperLogLog(int bits = 14) : numRegisters(1 << bits), registerBits(bits), registers(1 << bits, 0) {}
+    HyperLogLog(int bits = 14) : registers(1 << bits), numRegisters(1 << bits), registerBits(bits) {}
 
     void add(uint64_t value) {
         if (isExactCount) {
@@ -37,7 +54,7 @@ public:
 
         uint64_t hash = hashTuple(value);
         int idx = hash >> (64 - registerBits);
-        uint8_t rank = std::min(64 - registerBits, 1 + std::countl_zero(hash | (1ULL << (64 - registerBits))));
+        uint8_t rank = std::min<int>(64 - registerBits, 1 + countLeadingZeros(hash | (1ULL << (64 - registerBits))));
         registers[idx] = std::max(registers[idx], rank);
     }
 
